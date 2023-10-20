@@ -10,7 +10,7 @@ class TopController < ApplicationController
   def login
     logger.debug params[:uid]
       
-    if BCrypt::Password.new(User.find(uid: params[:uid]).pass) == params[:pass]
+    if BCrypt::Password.new(User.find_by(uid: params[:uid]).pass) == params[:pass]
       session[:login_uid] = params[:uid]
       redirect_to top_main_path
     else
